@@ -81,3 +81,47 @@ create table colegios (
     REFERENCES COMUNAS(ID)
 );
 
+select * from colegios;
+
+--6. Import the data: https://gist.github.com/amartinezg/035524e3cb6ec719bb839dd97018c098
+--7. Queries (DO NOT CHANGE THE NAME OF THE COLUMNS):
+--7. Queries (DO NOT CHANGE THE NAME OF THE COLUMNS):
+
+--7.1: Traiga el nombre del barrio y el número de colegios ubicados en cada barrio de aquellas instituciones ubicadas en la comuna de buenos aires ordenado por el número de colegios de mayor a menor.
+	-- Columnas: barrio, numero_colegios
+    
+    select  c.barrio,
+    count(*) OVER (PARTITION BY barrio) barrio_count
+    from colegios c inner join comunas co
+    on c.comunas_id = co.id
+    where co.nombre = 'BUENOS AIRES';
+	
+	--7.2: Traiga los registros junto con el nombre de su comuna, para cada registro deberá calcularse el total de los estudiantes según los contadores. También deberá traer el total de estudiantes agrupados por comuna.
+	 --Columnas: ID, NOMBRE_SEDE, COMUNA_ID, NOMBRE_COMUNA, TOTAL_GENERAL, TOTAL_POR COMUNA
+     
+     
+
+--7.3: Traiga los colegios que dicten clases a estudiantes de prejardin-jardin y que en la prestación de su servicio 
+--sean no oficiales para las comunas ARANJUEZ, CASTILLA y DOCE DE OCTUBRE. Deberá incluir el contador de estudiantes de secundaria y
+--deberá calcular el promedio de estudiantes de secundaria agrupados por comuna redondeado a 2 decimales.
+--Columnas: ID, NOMBRE_SEDE, COMUNA_ID, NOMBRE_COMUNA, CONTADOR_SECUNDARIA, PROMEDIO_SECUNDARIA_COMUNA
+     
+       select c.nombre_sede, c.PRESTACION_SERVICIO, c.CONTADOR_SECUNDARIA
+         from COLEGIOS  c inner join comunas co
+         on c.comunas_id = co.id       
+       where c.CONTADOR_PREJARDIN_JARDIN<>0 and c.PRESTACION_SERVICIO <>'OFICIAL' and c.barrio in('ARANJUEZ','CASTILLA','DOCE DE OCTUBRE')
+     
+     
+     
+     
+     
+
+--7.4 Traiga el nombre de los rectores y el número de colegios encargados para cada rector de aquellos rectores que estén encargados de más de 2 colegios. 
+	--Los registros deberán estar ordenados alfabéticamente
+	--Nota: NO se deberán incluir aquellos registros que tengan un correo electrónico registrado y tampoco aquellos que registran como nombre "s/d"
+	--Columnas: rector, numero_colegios
+
+--7.5 Muestre el nombre del colegio, el barrio, la dirección de aquellos colegios que estén ubicados en la zona rural y tengan algún tipo de clasificación en el ICFES. Además deberá traer aquellos colegios que enseñan a más de 200 estudiantes adultos
+	--Columnas: barrio, numero_colegios
+    
+
