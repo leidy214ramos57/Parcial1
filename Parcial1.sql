@@ -120,7 +120,11 @@ select * from colegios;
 	--Los registros deberán estar ordenados alfabéticamente
 	--Nota: NO se deberán incluir aquellos registros que tengan un correo electrónico registrado y tampoco aquellos que registran como nombre "s/d"
 	--Columnas: rector, numero_colegios
-
+	
+	select c.rector, c.tipo_sede
+	     from COLEGIOS  c inner join comunas co
+         on c.comunas_id = co.id 
+         order by c.tipo_sede
 --7.5 Muestre el nombre del colegio, el barrio, la dirección de aquellos colegios que estén ubicados en la zona rural y tengan algún tipo de clasificación en el ICFES. Además deberá traer aquellos colegios que enseñan a más de 200 estudiantes adultos
 	--Columnas: barrio, numero_colegios
     
